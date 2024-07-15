@@ -3,7 +3,7 @@ const app = express();
 const PORT = process.env.PORT;
 app.use(express.json());
 
-app.post('*', (req, res) => {
+app.post('/hiprovider', (req, res) => {
     try {
         // Retrieve the callback data from the request
         const callbackData = req.body;
