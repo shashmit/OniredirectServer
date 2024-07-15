@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-
+const port = 4000;
 app.use(express.json());
 
-app.post('/abdm-callback', (req, res) => {
+app.post('*', (req, res) => {
     try {
         // Retrieve the callback data from the request
         const callbackData = req.body;
@@ -31,6 +31,6 @@ app.post('/abdm-callback', (req, res) => {
     }
 });
 
-app.listen(4000, () => {
+app.listen(, () => {
     console.log('Server listening on port 4000');
 });
