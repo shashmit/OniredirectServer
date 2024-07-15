@@ -5,6 +5,7 @@ app.use(express.json());
 
 app.post('/hiprovider/*', (req, res) => {
     try {
+        throw new Error('An error occurred');
         // Retrieve the callback data from the request
         const callbackData = req.body;
 
