@@ -1,35 +1,29 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
-app.post('/hiprovider/*', (req, res) => {
-    try {
-        throw new Error('An error occurred');
-        // Retrieve the callback data from the request
-        const callbackData = req.body;
+app.all('*', (req, res) => {
+    const data = req.body;
+    const path = req.path;
 
-        // Validate the callback data
-        if (!callbackData || !callbackData.callbackUrl || !callbackData.data) {
-            return res.status(400).json({ error: 'Invalid callback data' });
-        }
+    console.log(`Received request on path: ${path}`);
 
-        // Process the callback data
-        const { callbackUrl, data: callbackDataContent } = callbackData;
-
-        // Perform any necessary processing or storage of the callback data
-        console.log(`Received callback from ABDM: ${callbackUrl}`);
-        console.log(`Callback data: ${JSON.stringify(callbackDataContent)}`);
-
-        // Return a success response
-        res.status(200).json({ message: 'Callback received successfully' });
-
-    } catch (error) {
-        // Handle any errors that occur during the processing
-        console.error(error);
-        res.status(500).json({ error: 'Error processing callback' });
+    // Check if the request contains the expected structure
+    if (!data || !data.type) {
+        return res.status(400).json({ status: "error", message: "Invalid request format" });
     }
+
+    const eventType = data.type;
+    console.log(`Received event: ${eventType}`);
+
+    // Process the event
+    processEvent(eventType, data);
+
+    res.status(200).json({ status: "success", message: "Event processed" });
 });
+
+
 app.listen(PORT, () => {
-    console.log('Server listening on port 4000');
+    console.log(`Server listening on port ${PORT}`);
 });
