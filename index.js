@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 4000;
+const PORT = process.env.PORT;
 app.use(express.json());
 
 app.post('*', (req, res) => {
@@ -31,6 +31,6 @@ app.post('*', (req, res) => {
     }
 });
 
-app.listen(, () => {
+app.listen(PORT, () => {
     console.log('Server listening on port 4000');
 });
