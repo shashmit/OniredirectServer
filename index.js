@@ -42,7 +42,7 @@ async function refreshAccessToken() {
 }
 
 
-app.all('*', async (req, res) => {
+app.all('/hip/*', async (req, res) => {
     try {
         if (!accessToken) {
           await refreshAccessToken();
@@ -52,10 +52,10 @@ app.all('*', async (req, res) => {
         const data = req.body;
         const path = req.path;
         console.log(`Received request on path: ${path}`);
-        console.log('Request data:', data);
         
         // Here you can use the accessToken, requestId, and timestamp as needed
         if(path === "/v0.5/users/auth/on-init"){
+          console.log('Request:', data);
           req.session.lastTransactionId = req.body.auth.transactionId;
         }
     
@@ -97,8 +97,7 @@ app.post('/init-auth', async (req, res) => {
       requestBody,
       gwApiConfig
     );
-
-    app.post()
+    console.log('Response:', response.data);
     res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.message);
@@ -143,7 +142,8 @@ app.post('/confirm-auth', async (req, res) => {
       requestBody,
       gwApiConfig
     );
-
+    
+    console.log('Response:', response.data);
     res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.message);
