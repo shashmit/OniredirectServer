@@ -52,14 +52,14 @@ app.all('/hip/*', async (req, res) => {
         const data = req.body;
         const path = req.path;
         console.log(`Received request on path: ${path}`);
+        console.log('Request:', data)
         
         // Here you can use the accessToken, requestId, and timestamp as needed
-        if(path === "/v0.5/users/auth/on-init"){
-          console.log('Request:', data);
+        if(path === "/hip/v0.5/users/auth/on-init"){
           req.session.lastTransactionId = req.body.auth.transactionId;
         }
     
-        res.status(200).json({ status: "success", message: "Event processed" });
+        res.status(200);
       } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({ status: "error", message: "Internal server error" });
