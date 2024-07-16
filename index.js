@@ -57,7 +57,8 @@ app.all('/hip/*', async (req, res) => {
         
         // Here you can use the accessToken, requestId, and timestamp as needed
         if(path === "/hip/v0.5/users/auth/on-init"){
-            transactionId = data.auth.transactionId;
+          console.log(data.auth.transactionId)
+          transactionId = data.auth.transactionId;
         }
     
         res.status(200);
