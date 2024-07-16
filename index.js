@@ -10,15 +10,7 @@ app.use(express.json());
 
 let accessToken = null;
 let gwApiConfig = null;
-
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { maxAge: 3600000 } // 1 hour
-}));
-
-let tId = null;
+let transactionId = null;
 
 async function refreshAccessToken() {
   try {
@@ -57,8 +49,7 @@ app.all('/hip/*', async (req, res) => {
         
         // Here you can use the accessToken, requestId, and timestamp as needed
         if(path === "/hip/v0.5/users/auth/on-init"){
-          req.session.lastTransactionId = data.auth.transactionId;
-          tId = data.auth.transactionId;
+          transactionId = data.auth.transactionId;
         }
     
         res.status(200);
@@ -119,19 +110,15 @@ app.post('/confirm-auth', async (req, res) => {
     // Get demographic data from Postman request
     const { name, gender, dateOfBirth } = req.body;
 
-    // Retrieve the transactionId from the session
-    const transactionId = req.session.lastTransactionId;
-    console.log('Transaction ID:', transactionId);
-    console.log('TID:', tId);
-
-    if (!transactionId) {
-      return res.status(400).json({ status: "error", message: "No transaction ID found. Please perform on-init first." });
+    if(!transactionId){
+      return res.status(400).json({ status: "error", message: "Transaction ID not found" });
     }
+    console.log('TID:', transactionId);
 
     const requestBody = {
       requestId: requestId,
       timestamp: timestamp,
-      transactionId: transactionId || tId,
+      transactionId: transactionId,
       credential: {
         demographic: {
           name: name,
