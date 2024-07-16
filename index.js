@@ -44,6 +44,7 @@ app.all('*', async (req, res) => {
         const data = req.body;
         const path = req.path;
         console.log(`Received request on path: ${path}`);
+        console.log('Request data:', data);
         
         // Here you can use the accessToken, requestId, and timestamp as needed
     
@@ -54,33 +55,6 @@ app.all('*', async (req, res) => {
       }
 });
 
-app.post("/auth/init", async (req, res) => {
-    if (!accessToken) {
-          await refreshAccessToken();
-    }
-    const requestId = uuidv4();
-    const timestamp = new Date().toISOString();
-    // const data = req.body;
-    // const path = req.path;
-    const body = {
-        requestId: requestId,
-        timestamp: timestamp,
-        query: {
-          id: "91343432822736@sbx",
-          purpose: "KYC_AND_LINK",
-          requester: {
-            type: "HIP",
-            id: "SBX_007421"
-          }
-        }
-      };
-      const response = await axios.post(
-        "https://dev.abdm.gov.in/gateway/v0.5/users/auth/init",
-        body,
-        gwApiConfig
-      );
-      console.log('Response:', response.data);
-})
 
 
 app.listen(PORT, () => {
