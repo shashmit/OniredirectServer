@@ -97,7 +97,7 @@ app.post('/init-auth', async (req, res) => {
       requestBody,
       gwApiConfig
     );
-    console.log('Response:', response.data);
+
     res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.message);
