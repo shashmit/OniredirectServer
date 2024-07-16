@@ -18,6 +18,7 @@ app.use(session({
   cookie: { maxAge: 3600000 } // 1 hour
 }));
 
+let transactionId = null;
 
 async function refreshAccessToken() {
   try {
@@ -56,7 +57,7 @@ app.all('/hip/*', async (req, res) => {
         
         // Here you can use the accessToken, requestId, and timestamp as needed
         if(path === "/hip/v0.5/users/auth/on-init"){
-          req.session.lastTransactionId = req.body.auth.transactionId;
+            transactionId = data.auth.transactionId;
         }
     
         res.status(200);
