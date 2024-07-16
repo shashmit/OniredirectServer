@@ -18,7 +18,7 @@ app.use(session({
   cookie: { maxAge: 3600000 } // 1 hour
 }));
 
-let transactionId = null;
+let tId = null;
 
 async function refreshAccessToken() {
   try {
@@ -57,8 +57,8 @@ app.all('/hip/*', async (req, res) => {
         
         // Here you can use the accessToken, requestId, and timestamp as needed
         if(path === "/hip/v0.5/users/auth/on-init"){
-          console.log(data.auth.transactionId)
-          transactionId = data.auth.transactionId;
+          req.session.lastTransactionId = data.auth.transactionId;
+          tId = data.auth.transactionId;
         }
     
         res.status(200);
@@ -121,6 +121,8 @@ app.post('/confirm-auth', async (req, res) => {
 
     // Retrieve the transactionId from the session
     const transactionId = req.session.lastTransactionId;
+    console.log('Transaction ID:', transactionId);
+    console.log('TID:', tId);
 
     if (!transactionId) {
       return res.status(400).json({ status: "error", message: "No transaction ID found. Please perform on-init first." });
@@ -129,7 +131,7 @@ app.post('/confirm-auth', async (req, res) => {
     const requestBody = {
       requestId: requestId,
       timestamp: timestamp,
-      transactionId: transactionId,
+      transactionId: transactionId || tId,
       credential: {
         demographic: {
           name: name,
