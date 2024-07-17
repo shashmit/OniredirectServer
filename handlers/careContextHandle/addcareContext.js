@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 import config from '../../config/temp.js';
+import refreshAccessToken from '../../utils/refreshToken.js';
 
 async function addCareContext(req, res) {
     const { referenceNumber, display, careContext, abhaId } = req.body;
