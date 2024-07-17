@@ -24,7 +24,7 @@ async function addCareContext(req, res) {
         const response = await axios.post(
             'https://dev.abdm.gov.in/gateway/v0.5/links/link/add-contexts',
             data,
-            gwApiConfig
+            config.gwApiConfig
         );
 
         res.status(200).json(response.data);
