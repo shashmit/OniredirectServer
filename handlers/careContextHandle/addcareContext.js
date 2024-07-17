@@ -4,7 +4,9 @@ import config from '../../config/temp.js';
 
 async function addCareContext(req, res) {
     const { referenceNumber, display, careContext, abhaId } = req.body;
-
+    if (!config.accessToken) {
+        await refreshAccessToken();
+    }
     try {
         const requestId = uuidv4();
         const timestamp = new Date().toISOString();

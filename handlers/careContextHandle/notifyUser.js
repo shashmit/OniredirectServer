@@ -4,7 +4,9 @@ import config from '../../config/temp.js';
 
 async function notifyUser(req, res) {
   const { phoneNo } = req.body;
-
+  if (!config.accessToken) {
+    await refreshAccessToken();
+}
   try {
     const requestId = uuidv4();
     const timestamp = new Date().toISOString();
