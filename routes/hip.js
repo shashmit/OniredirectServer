@@ -43,8 +43,10 @@ router.all('/*', async (req, res, next) => {
       const timestamp = new Date().toISOString();
       const data = req.body;
       const path = req.path;
+      const headers = req.headers;
       console.log(`Received request on path: ${path}`);
       console.log('Request:', JSON.stringify(data));
+      console.log('Headers:', JSON.stringify(headers));
 
       switch (true) {
           case path === "/v0.5/users/auth/on-init":
@@ -59,7 +61,7 @@ router.all('/*', async (req, res, next) => {
               break;
 
           case path === '/api/v3/hip/patient/care-context/discover':
-              const result = await discoverController(data);
+              const result = await discoverController(data, headers);
               res.status(200).json(result);
               break;
 

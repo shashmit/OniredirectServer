@@ -96,7 +96,8 @@ const patients = [
       { type: 'ABHA_NUMBER', value: '91-3434-3282-2736' },
       { type: 'abhaAddress', value: '91343432822736@sbx' }
     ],
-    unverifiedIdentifiers: [
+    unverifiedIdentifiers:[
+      {type:"MR", value:"6b6ad980-d957-46b1-b024-fb232bd62149"}
     ],
     name: 'Shashmit Kumar',
     gender: 'M',

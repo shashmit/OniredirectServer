@@ -4,7 +4,7 @@ import refreshAccessToken from '../utils/refreshToken.js';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-export default async function discoverController(query) {
+export default async function discoverController(query,headers) {
     if(!config.accessToken){
         await refreshAccessToken();
     }
@@ -27,4 +27,5 @@ export default async function discoverController(query) {
         statusText: response.statusText,
         data: response.config.data,
       };
+
 }
