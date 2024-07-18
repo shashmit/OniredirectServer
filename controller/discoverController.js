@@ -15,7 +15,10 @@ export default async function discoverController(query,headers) {
         requestId: requestId,
         timestamp: timestamp,
         transactionId: query.transactionId,
-        patient: patientInfo.patient
+        patient: patientInfo.patient,
+        resp:{
+            requestId: headers["request-id"]
+        }
     }
     const response = await axios.post(
         "https://dev.abdm.gov.in/gateway/v0.5/care-contexts/on-discover",
@@ -26,6 +29,6 @@ export default async function discoverController(query,headers) {
         status: response.status,
         statusText: response.statusText,
         data: response.config.data,
+       
       };
-
 }
