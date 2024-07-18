@@ -44,7 +44,7 @@ router.all('/*', async (req, res, next) => {
       const data = req.body;
       const path = req.path;
       console.log(`Received request on path: ${path}`);
-      console.log('Request:', data);
+      console.log('Request:', JSON.stringify(data));
 
       switch (true) {
           case path === "/v0.5/users/auth/on-init":
