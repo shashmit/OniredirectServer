@@ -38,6 +38,7 @@ export default async function initController(data, headers) {
     { transactionId: data.transactionId },
     {
       $set: {
+        otp: otp,
         patient: careContext,
         linkReNumber : generatedLinkRefNumber
       }}
