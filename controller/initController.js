@@ -41,10 +41,9 @@ export default async function initController(data, headers) {
       ...config.OTPDATABASE[existingIndex],
       otp: otp,
       patient: careData.patient,
-      linkReNumber: generatedLinkRefNumber
+      linkRefNumber: generatedLinkRefNumber
     };
   }
-  console.log("updayes", JSON.stringify(config.OTPDATABASE));
   try{
     const response = await axios.post(
       "https://dev.abdm.gov.in/gateway/v0.5/links/link/on-init",

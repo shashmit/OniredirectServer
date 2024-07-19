@@ -5,7 +5,7 @@ import config from "../config/temp.js"
 import refreshAccessToken from '../utils/refreshToken.js'
 import discoverController from '../controller/discoverController.js'
 import initController from '../controller/initController.js'
-
+import confirmController from '../controller/confirmController.js'
 router.all('/*', async (req, res, next) => {
   try {
       if (!config.accessToken) {
@@ -43,10 +43,10 @@ router.all('/*', async (req, res, next) => {
               const initResult = await initController(data, headers);
               res.status(200).json(initResult);
               break;
-        //   case path === "/api/v3/hip/link/care-context/confirm":
-        //       const confirmResult = await confirmController(data, headers);
-        //       res.status(200).json(confirmResult);
-        //       break;
+          case path === "/api/v3/hip/link/care-context/confirm":
+              const confirmResult = await confirmController(data,headers);
+              res.status(200).json(confirmResult);
+              break;
 
           default:
               res.status(404).json({ message: "Endpoint not found" });
