@@ -115,70 +115,7 @@ const patients = [
   },
 ];
 
-// export default function discoverPatients(query) {
-//   const patient = query.patient;
-  
-//   // Check ABHA Address
-//   const abhaAddress = patient.verifiedIdentifiers.find(id => id.type === 'abhaAddress')?.value;
-//   if (abhaAddress) {
-//     const abhaMatch = patients.find(p => 
-//       p.verifiedIdentifiers.find(id => id.type === 'abhaAddress' && id.value === abhaAddress)
-//     );
-//     if (abhaMatch) {
-//       return { match: true, record: abhaMatch, careContexts: abhaMatch.careContexts };
-//     }
-//   }
-  
-//   // Check Mobile Number
-//   const mobileNumber = patient.verifiedIdentifiers.find(id => id.type === 'MOBILE')?.value;
-//   if (mobileNumber) {
-//     const mobileMatches = patients.filter(p => 
-//       p.verifiedIdentifiers.find(id => id.type === 'MOBILE' && id.value === mobileNumber)
-//     );
-//     if (mobileMatches.length > 0) {
-//       return checkGender(mobileMatches, patient);
-//     }
-//   }
-  
-//   // Check Medical Record Number
-//   const mrNumber = patient.unverifiedIdentifiers.find(id => id.type === 'MR')?.value;
-//   if (mrNumber) {
-//     const mrnMatches = patients.filter(p => 
-//       p.unverifiedIdentifiers.find(id => id.type === 'MR' && id.value === mrNumber)
-//     );
-//     if (mrnMatches.length > 0) {
-//       return checkGender(mrnMatches, patient);
-//     }
-//   }
-  
-//   return { match: false, message: "No matching records found" };
-// }
 
-// function checkGender(matches, patient) {
-//   const genderMatches = matches.filter(p => p.gender === patient.gender);
-//   if (genderMatches.length === 0) {
-//     return { match: false, message: "No matching records found" };
-//   }
-//   return checkYearOfBirth(genderMatches, patient);
-// }
-
-// function checkYearOfBirth(matches, patient) {
-//   const yearMatches = matches.filter(p => Math.abs(p.yearOfBirth - patient.yearOfBirth) <= 5);
-//   if (yearMatches.length === 0) {
-//     return { match: false, message: "No matching records found" };
-//   }
-//   return checkName(yearMatches, patient);
-// }
-
-// function checkName(matches, patient) {
-//   // Soundex comparison
-//   const querySoundex = soundex(patient.name);
-//   const nameMatch = matches.find(p => soundex(p.name) === querySoundex);
-//   if (nameMatch) {
-//     return { match: true, record: nameMatch, careContexts: nameMatch.careContexts };
-//   }
-//   return { match: false, message: "No matching records found" };
-// }
 export default function discoverPatients(query) {
   const patient = query.patient;
   let matchedBy = [];
