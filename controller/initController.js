@@ -8,9 +8,11 @@ export default async function initController(data, headers) {
     await refreshAccessToken();
   }
   const generatedLinkRefNumber = uuidv4();
+  const requestId = uuidv4();
+  const timestamp = new Date().toISOString();
   const body = {
-    requestId,
-    timestamp,
+    requestId: requestId,
+    timestamp: timestamp,
     transactionId: data.transactionId,
     link: {
       referenceNumber: generatedLinkRefNumber,
