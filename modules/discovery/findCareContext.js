@@ -9,6 +9,7 @@ export default async function findCareContext(data) {
   const matchingPatient = matchingPatients[0];
   
   const requestedReferenceNumbers = data.patient.careContexts.map(cc => cc.referenceNumber);
+  console.log("Requested Reference Numbers:", requestedReferenceNumbers);
   let filteredCareContexts;
   try {
     filteredCareContexts = matchingPatient.patient.careContexts.filter(cc =>
