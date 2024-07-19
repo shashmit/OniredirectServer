@@ -32,7 +32,7 @@ export default async function initController(data, headers) {
     const response = await axios.post(
       "https://dev.abdm.gov.in/gateway/v0.5/links/link/on-init",
       body,
-      congif.gwApiConfig
+      config.gwApiConfig
     );
     return {
       status: response.status,
