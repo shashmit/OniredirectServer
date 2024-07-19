@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import config from "../config/temp.js"
 import refreshAccessToken from '../utils/refreshToken.js'
 import discoverController from '../controller/discoverController.js'
-
+import initController from '../controller/initController.js'
 
 router.all('/*', async (req, res, next) => {
   try {
