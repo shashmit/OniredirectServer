@@ -34,6 +34,7 @@ export default async function initController(data, headers) {
   const careData = await findCareContext(data);
   const otp = generateOTP();
   console.log("init",JSON.stringify(careData.patient));
+  console.log(otp)
 
   const existingIndex = config.OTPDATABASE.findIndex(item => item.transactionId === data.transactionId);
   if (existingIndex !== -1) {
