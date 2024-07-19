@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
-import refreshAccessToken from '../utils/refreshAccessToken';
+import refreshAccessToken from '../utils/refreshToken.js';
 import config from '../config/temp.js';
 
 export default async function initController(data, headers) {
