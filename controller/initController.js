@@ -31,7 +31,7 @@ export default async function initController(data, headers) {
       requestId: headers["request-id"],
     },
   };
-  const careContext = await findCareContext(data);
+  const careData = await findCareContext(data);
   const otp = generateOTP();
   console.log("init",JSON.stringify(careContext));
   config.OTPDATABASE.findOneAndUpdate(
@@ -39,7 +39,7 @@ export default async function initController(data, headers) {
     {
       $set: {
         otp: otp,
-        patient: careContext,
+        patient: careData,
         linkReNumber : generatedLinkRefNumber
       }}
     )
