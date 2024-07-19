@@ -10,7 +10,7 @@ export default async function findCareContext(data) {
   let filteredCareContexts;
   
   try{
-    filteredCareContexts = matchingPatient;
+    filteredCareContexts = matchingPatient.patient[0];
     console.log("findCareContex",JSON.stringify(filteredCareContexts));
   } catch (e) {
     throw new Error(e);
