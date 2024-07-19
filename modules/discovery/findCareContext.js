@@ -11,7 +11,9 @@ export default async function findCareContext(data) {
   console.log("findCare",requestedReferenceNumbers);
   
   try{
-    filteredCareContexts = matchingPatient.patient.careContexts;
+    filteredCareContexts = matchingPatient.patient.careContexts.filter(cc => 
+      requestedReferenceNumbers.includes(cc.referenceNumber)
+    );;
     console.log("findCareContex",JSON.stringify(filteredCareContexts));
   } catch (e) {
     throw new Error(e);
