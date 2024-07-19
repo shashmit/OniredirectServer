@@ -12,7 +12,7 @@ export default async function findCareContext(data) {
   console.log("MAtching patient", matchingPatient);
   
   try{
-    filteredCareContexts = matchingPatient.patient.careContexts.filter(cc =>
+    filteredCareContexts = matchingPatient.patient[0].careContexts.filter(cc =>
       requestedReferenceNumbers.includes(cc.referenceNumber)
     );
   } catch (e) {
