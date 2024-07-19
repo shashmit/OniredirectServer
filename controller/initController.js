@@ -33,7 +33,7 @@ export default async function initController(data, headers) {
   };
   const careData = await findCareContext(data);
   const otp = generateOTP();
-  console.log("init",JSON.stringify(careDatat));
+  console.log("init",JSON.stringify(careData));
   config.OTPDATABASE.findOneAndUpdate(
     { transactionId: data.transactionId },
     {
