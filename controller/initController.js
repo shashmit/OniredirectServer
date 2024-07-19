@@ -33,17 +33,17 @@ export default async function initController(data, headers) {
   };
   const careData = await findCareContext(data);
   const otp = generateOTP();
-  console.log("init",JSON.stringify(careData));
+  console.log("init",JSON.stringify(careData.patient));
+
   config.OTPDATABASE.findOneAndUpdate(
     { transactionId: data.transactionId },
     {
       $set: {
         otp: otp,
-        patient: careData,
+        patient: careData.patient,
         linkReNumber : generatedLinkRefNumber
       }}
     )
-    console.log("databse",JSON.stringify(config.OTPDATABASE));
   try{
     const response = await axios.post(
       "https://dev.abdm.gov.in/gateway/v0.5/links/link/on-init",

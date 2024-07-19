@@ -20,7 +20,6 @@ export default async function findCareContext(data) {
   if (filteredCareContexts.length === 0) {
     throw new Error("No Care Context Found");
   }
-  console.log("matchingPatient",JSON.stringify(matchingPatient));
   return {
     ...matchingPatient,
     careContexts: filteredCareContexts
