@@ -2,7 +2,7 @@ import config from '../../config/temp.js';
 
 export default async function findCareContext(data) {
   const matchingPatient = config.OTPDATABASE.find(c => c.transactionId === data.transactionId);
-  
+  console.log("matching patient", config.OTPDATABASE);
   if (!matchingPatient) {
     throw new Error("No Care Context Found");
   }
