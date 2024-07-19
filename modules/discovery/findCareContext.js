@@ -1,32 +1,30 @@
 import config from '../../config/temp.js';
 
 export default async function findCareContext(data) {
-  const matchingPatients = config.OTPDATABASE.filter(c => c.transactionId === data.transactionId);
-  
-  if (matchingPatients.length === 0 || !matchingPatients[0].patient) {
-    throw new Error("No Patient Found");
+  const matchingPatient = config.OTPDATABASE.find(c => c.transactionId === data.transactionId);
+  console.log("matching patient", config.OTPDATABASE);
+  if (!matchingPatient) {
+    throw new Error("No Care Context Found");
   }
-  const matchingPatient = matchingPatients[0];
   
-  const requestedReferenceNumbers = data.patient.careContexts.map(cc => cc.referenceNumber);
-  console.log("Requested Reference Numbers:", requestedReferenceNumbers);
+  const requestedReferenceNumbers = data.patient[0].careContexts.map(cc => cc.referenceNumber);
   let filteredCareContexts;
-  try {
+  console.log("MAtching patient", matchingPatient);
+  
+  try{
     filteredCareContexts = matchingPatient.patient.careContexts.filter(cc =>
       requestedReferenceNumbers.includes(cc.referenceNumber)
     );
   } catch (e) {
-    console.error("Error filtering care contexts:", e);
-    throw new Error("Error processing Care Contexts");
+    throw new Error(e);
   }
 
-  if (!filteredCareContexts || filteredCareContexts.length === 0) {
-    throw new Error("No matching Care Contexts Found");
+  if (filteredCareContexts.length === 0) {
+    throw new Error("No Care Context Found");
   }
   
   return {
-    ...matchingPatient.patient,
+    ...matchingPatient,
     careContexts: filteredCareContexts
   };
-
 }
