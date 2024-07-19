@@ -9,13 +9,14 @@ export default async function findCareContext(data) {
   
   const requestedReferenceNumbers = data.patient[0].careContexts.map(cc => cc.referenceNumber);
   let filteredCareContexts;
+  console.log("MAtching patient", matchingPatient);
   
   try{
     filteredCareContexts = matchingPatient.patient.careContexts.filter(cc =>
       requestedReferenceNumbers.includes(cc.referenceNumber)
     );
   } catch (e) {
-    throw new Error("No Care Context Found");
+    throw new Error(e);
   }
 
   if (filteredCareContexts.length === 0) {
