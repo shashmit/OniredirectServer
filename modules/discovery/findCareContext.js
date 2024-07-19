@@ -8,13 +8,11 @@ export default async function findCareContext(data) {
   
   const requestedReferenceNumbers = data.patient[0].careContexts.map(cc => cc.referenceNumber);
   let filteredCareContexts;
-  console.log("findCare",requestedReferenceNumbers);
   
   try{
     filteredCareContexts = matchingPatient.patient.careContexts.filter(cc => 
       requestedReferenceNumbers.includes(cc.referenceNumber)
     );;
-    console.log("findCareContex",JSON.stringify(filteredCareContexts));
   } catch (e) {
     throw new Error(e);
   }
@@ -22,7 +20,7 @@ export default async function findCareContext(data) {
   if (filteredCareContexts.length === 0) {
     throw new Error("No Care Context Found");
   }
-  
+  console.log("matchingPatient",JSON.stringify(matchingPatient));
   return {
     ...matchingPatient,
     careContexts: filteredCareContexts
