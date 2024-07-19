@@ -29,6 +29,5 @@ export default async function discoverController(query,headers) {
         status: response.status,
         statusText: response.statusText,
         data: response.config.data,
-       
       };
 }
