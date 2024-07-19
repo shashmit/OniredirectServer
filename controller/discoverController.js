@@ -26,8 +26,16 @@ export default async function discoverController(query,headers) {
         body,
         config.gwApiConfig
       );
-    // generate a 6 digit random number and convert it to string
-      config.OTPDATABASE.push({patient: patientInfo.patient, transactionId: query.transactionId});
+
+      // config.OTPDATABASE.push({patient: patientInfo.patient, transactionId: query.transactionId});
+
+      config.OTPDATABASE.push({
+        patient: patientInfo.patient,
+        transactionId: query.transactionId,
+        otp: null,
+        linkReNumber: null,
+      });
+    
       return {
         status: response.status,
         statusText: response.statusText,
