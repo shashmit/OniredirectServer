@@ -3,7 +3,7 @@ import config from "../config/temp.js";
 import refreshAccessToken from '../utils/refreshToken.js';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-import generateOTP from '../utils/randomGenerator.js';
+
 
 export default async function discoverController(query,headers) {
     if(!config.accessToken){
@@ -27,8 +27,7 @@ export default async function discoverController(query,headers) {
         config.gwApiConfig
       );
     // generate a 6 digit random number and convert it to string
-      const otp = generateOTP();
-      config.OTPDATABASE.push({otp, patient: patientInfo.patient, transactionId: query.transactionId});
+      config.OTPDATABASE.push({patient: patientInfo.patient, transactionId: query.transactionId});
       return {
         status: response.status,
         statusText: response.statusText,

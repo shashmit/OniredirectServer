@@ -3,6 +3,8 @@ import axios from 'axios';
 import refreshAccessToken from '../utils/refreshToken.js';
 import config from '../config/temp.js';
 import findCareContext from '../modules/discovery/findCareContext.js';
+import generateOTP from '../utils/randomGenerator.js';
+
 export default async function initController(data, headers) {
   if(!config.accessToken){
     await refreshAccessToken();
@@ -30,15 +32,16 @@ export default async function initController(data, headers) {
     },
   };
   const careContext = await findCareContext(data);
+  const otp = generateOTP();
   console.log("init",JSON.stringify(careContext));
   config.OTPDATABASE.findOneAndUpdate(
     { transactionId: data.transactionId },
     {
       $set: {
-        patient: careContext
+        patient: careContext,
+        linkReNumber : generatedLinkRefNumber
       }}
     )
-
     console.log("databse",JSON.stringify(config.OTPDATABASE));
   try{
     const response = await axios.post(
