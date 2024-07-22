@@ -85,12 +85,13 @@ router.post("/consent/find/patient", async (req, res) => {
       }
     }
   };
+  const patient = await config.TEMP_PATIENTS_SEARCH_RESULT[req.body.patient?.id];
+  console.log(patient)
   const response = await axios.post(
     "https://dev.abdm.gov.in/gateway/v0.5/patients/find",
     body,
     config.gwApiConfig
   );
-  const patient = await config.TEMP_PATIENTS_SEARCH_RESULT[req.body.patient?.id];
   res.status(200).json(patient);
   
   }catch(e){
