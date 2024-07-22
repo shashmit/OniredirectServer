@@ -70,7 +70,6 @@ router.post("/consent/find/patient", async (req, res) => {
     if (!config.accessToken) {
       await refreshAccessToken();
   }
-  console.log("3",req.body )
   const requestId = uuidv4();
   const timestamp = new Date().toISOString();
   const body = {
@@ -86,13 +85,13 @@ router.post("/consent/find/patient", async (req, res) => {
       }
     }
   };
-  const patient = await config.TEMP_PATIENTS_SEARCH_RESULT[req.body.patient?.id];
-  console.log(patient)
   const response = await axios.post(
     "https://dev.abdm.gov.in/gateway/v0.5/patients/find",
     body,
     config.gwApiConfig
   );
+  const patient = await config.TEMP_PATIENTS_SEARCH_RESULT[req.body.patient?.id];
+  console.log("2",patient)
   res.status(200).json(patient);
   
   }catch(e){
