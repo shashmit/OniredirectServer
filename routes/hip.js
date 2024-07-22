@@ -48,7 +48,8 @@ router.all('/*', async (req, res, next) => {
           case path === "/v0.5/patients/on-find":
                 const id = data.patient.id;
                 config.TEMP_PATIENTS_SEARCH_RESULT[id] = data;
-                res.status(200).send("hy");
+                res.status(200).send();
+                break;
 
           default:
               res.status(404).json({ message: "Endpoint not found" });
