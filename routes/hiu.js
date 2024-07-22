@@ -66,37 +66,49 @@ router.post("/consent/init", async (req, res) => {
 });
 
 router.post("/consent/find/patient", async (req, res) => {
-    if (!config.accessToken) {
-      await refreshAccessToken();
-  }
-  const requestId = uuidv4();
-  const timestamp = new Date().toISOString();
-  const body = {
-    requestId: requestId,
-    timestamp: timestamp,
-    query: {
-      patient: {
-        id: req.body.patient?.id
-      },
-      requester:{
-        type: req.body.requester?.type,
-        id: req.body.requester?.id
+  try {
+      if (!config.accessToken) {
+          await refreshAccessToken();
       }
-    }
-  };
-  await axios.post(
-    "https://dev.abdm.gov.in/gateway/v0.5/patients/find",
-    body,
-    config.gwApiConfig
-  ).then(response =>{
-    
-    const patient = config.TEMP_PATIENTS_SEARCH_RESULT[req.body.patient?.id];
-    console.log(patient)
-    res.status(200).json(patient);
-  }).catch(error =>{
-    console.error('Error:', error.message);
-    res.status(500).json({ status: "error", message: "Internal server error" });
-  });
-})
+
+      const requestId = uuidv4();
+      const timestamp = new Date().toISOString();
+      const body = {
+          requestId: requestId,
+          timestamp: timestamp,
+          query: {
+              patient: {
+                  id: req.body.patient?.id
+              },
+              requester: {
+                  type: req.body.requester?.type,
+                  id: req.body.requester?.id
+              }
+          }
+      };
+
+      await axios.post(
+          "https://dev.abdm.gov.in/gateway/v0.5/patients/find",
+          body,
+          config.gwApiConfig
+      );
+
+      // Set a timeout to check for the patient data
+      setTimeout(() => {
+          const patient = config.TEMP_PATIENTS_SEARCH_RESULT[req.body.patient?.id];
+          console.log(patient);
+
+          if (patient) {
+              res.status(200).json(patient);
+          } else {
+              res.status(404).json({ status: "error", message: "Patient not found" });
+          }
+      }, 5000); // 5000 milliseconds (5 seconds) delay
+
+  } catch (error) {
+      console.error('Error:', error.message);
+      res.status(500).json({ status: "error", message: "Internal server error" });
+  }
+});
 
 export default router;
