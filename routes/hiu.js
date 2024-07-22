@@ -70,6 +70,7 @@ router.post("/consent/find/patient", async (req, res) => {
     if (!config.accessToken) {
       await refreshAccessToken();
   }
+  console.log("3",req.body )
   const requestId = uuidv4();
   const timestamp = new Date().toISOString();
   const body = {
