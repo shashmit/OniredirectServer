@@ -55,11 +55,14 @@ const patients = [
 
 const OTPDATABASE =[];
 
+const TEMP_PATIENTS_SEARCH_RESULT = []
+
 export default {
   OTPDATABASE,
   patients,
   accessToken,
   gwApiConfig,
   transactionId,
-  tempDatabase
+  tempDatabase,
+  TEMP_PATIENTS_SEARCH_RESULT
 };

@@ -1,18 +1,16 @@
 import express from 'express'
 const router = express.Router()
-import { v4 as uuidv4 } from 'uuid'
 import config from "../config/temp.js"
 import refreshAccessToken from '../utils/refreshToken.js'
 import discoverController from '../controller/discoverController.js'
 import initController from '../controller/initController.js'
 import confirmController from '../controller/confirmController.js'
+
 router.all('/*', async (req, res, next) => {
   try {
       if (!config.accessToken) {
           await refreshAccessToken();
       }
-      const requestId = uuidv4();
-      const timestamp = new Date().toISOString();
       const data = req.body;
       const path = req.path;
       const headers = req.headers;
@@ -47,7 +45,10 @@ router.all('/*', async (req, res, next) => {
               const confirmResult = await confirmController(data,headers);
               res.status(200).json(confirmResult);
               break;
-
+          case path === "/v0.5/patients/on-find":
+                const id = data.patient.id;
+                config.TEMP_PATIENTS_SEARCH_RESULT[id] = data;
+                res.status(200).send();
           default:
               res.status(404).json({ message: "Endpoint not found" });
       }
