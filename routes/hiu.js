@@ -90,6 +90,7 @@ router.post("/consent/find/patient", async (req, res) => {
     config.gwApiConfig
   ).then(response =>{
     const patient = config.TEMP_PATIENTS_SEARCH_RESULT[req.body.patient?.id];
+    console.log(patient)
     res.status(200).json(patient);
   }).catch(error =>{
     console.error('Error:', error.message);
