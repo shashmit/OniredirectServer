@@ -19,7 +19,7 @@ async function refreshAccessToken() {
         "REQUEST-ID": uuidv4(),
         "TIMESTAMP": new Date().toISOString(),
         "X-HIP-ID": "SBX_007421",
-        "X-CM-ID": sbx
+        "X-CM-ID": "sbx"
       },
     };
     return { accessToken: config.accessToken, gwApiConfig: config.gwApiConfig };
