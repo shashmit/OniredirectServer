@@ -20,7 +20,7 @@ app.use(session({
 
 app.use(express.json());
 
-app.use('/auth', authRoutes);
+// app.use('/auth', authRoutes);
 app.use('/hip', hipRoutes);
 app.use("/carecontext", careRoutes);
 app.use("/hiu", hiuRoutes);

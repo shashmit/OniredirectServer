@@ -1,5 +1,6 @@
 import axios from 'axios';
 import config from '../config/temp.js';
+import { v4 as uuidv4 } from 'uuid';
 
 async function refreshAccessToken() {
   try {
@@ -11,10 +12,14 @@ async function refreshAccessToken() {
       }
     );
     config.accessToken = sessionResponse.data.accessToken;
+    
     config.gwApiConfig = {
       headers: {
         Authorization: `Bearer ${config.accessToken}`,
-        "X-CM-ID": "sbx",
+        "REQUEST-ID": uuidv4(),
+        "TIMESTAMP": new Date().toISOString(),
+        "X-HIP-ID": SBX_007421,
+        "X-CM-ID": sbx
       },
     };
     return { accessToken: config.accessToken, gwApiConfig: config.gwApiConfig };

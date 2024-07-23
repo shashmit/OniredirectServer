@@ -21,16 +21,22 @@ router.all('/*', async (req, res, next) => {
       console.log('Headers:', JSON.stringify(headers));
 
       switch (true) {
-          case path === "/v0.5/users/auth/on-init":
-              config.transactionId = data.auth.transactionId;
-              res.status(200).send();
-              break;
+        //   case path === "/v0.5/users/auth/on-init":
+        //       config.transactionId = data.auth.transactionId;
+        //       res.status(200).send();
+        //       break;
 
-          case path === "/v0.5/users/auth/on-confirm":
-              const abhaId = data.auth.patient.id;
-              config.tempDatabase[abhaId] = data.auth.accessToken;
-              res.status(200).send();
-              break;
+        //   case path === "/v0.5/users/auth/on-confirm":
+        //       const abhaId = data.auth.patient.id;
+        //       config.tempDatabase[abhaId] = data.auth.accessToken;
+        //       res.status(200).send();
+        //       break;
+
+          case path === "/api/v3/hip/token/on-generate-token":
+                const abhaId = data.abhaAddress;
+                config.tempDatabase[abhaId] = data.linkToken;
+                res.status(200).send();
+                break;
 
           case path === '/api/v3/hip/patient/care-context/discover':
               const result = await discoverController(data, headers);
