@@ -23,7 +23,7 @@ async function generateToken(req, res) {
     );
     return res.status(200).json(response.data);
   }catch(err){
-    console.error('Error:', error.message);
+    console.error('Error:', err.message);
     return res.status(500).json({ status: "error", message: "Internal server error" });
   }
 }
