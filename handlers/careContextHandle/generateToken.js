@@ -21,11 +21,10 @@ async function generateToken(req, res) {
       abhaAddress,
       name,
       gender,
-      dob
+      yearOfBirth: dob
   };
   
   try {
-    console.log(config.gwApiConfig);
       const response = await axios.post(
           'https://dev.abdm.gov.in/hiecm/api/v3/token/generate-token',
           body,
