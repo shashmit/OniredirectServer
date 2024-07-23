@@ -25,6 +25,7 @@ async function generateToken(req, res) {
   };
   
   try {
+    console.log(config.gwApiConfig);
       const response = await axios.post(
           'https://dev.abdm.gov.in/hiecm/api/v3/token/generate-token',
           body,
