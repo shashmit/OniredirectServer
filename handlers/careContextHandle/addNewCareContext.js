@@ -31,7 +31,7 @@ async function addNewCareContext(req, res) {
             body,
             {
               headers: {
-                ...config.gwApiConfig,
+                ...config.gwApiConfig.headers,
                 "X-LINK-TOKEN": config.tempDatabase[abhaId]
               }
             }
