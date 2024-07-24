@@ -28,8 +28,8 @@ async function addNewCareContext(req, res) {
             'https://dev.abdm.gov.in/hiecm/api/v3/link/carecontext',
             body,
             {
+                ...config.gwApiConfig,
                 headers:{
-                  ...config.gwApiConfig.headers,
                   "X-LINK-TOKEN": config.tempDatabase[abhaId]
                 }
             }
