@@ -4,18 +4,17 @@ import config from '../../config/temp.js';
 import refreshAccessToken from '../../utils/refreshToken.js';
 
 async function addNewCareContext(req, res) {
-
-    const { abhaNumber, abhaAddress,referenceNumber, display, careContexts, hiType, count} = req.body;
+    const data = req.body;
     if (!config.accessToken) {
         await refreshAccessToken();
     }
      const body = {
-        abhaNumber,
-        abhaAddress,
+        abhaNumber: data.abhaNumber,
+        abhaAddress: data.abhaAddress,
         patient: [
         {
-            referenceNumber: referenceNumber,
-            display: display,
+            referenceNumber: data.patient.referenceNumber,
+            display: data.patient.display,
             careContexts: careContexts,
             hiType: hiType,
             count: count
