@@ -23,7 +23,7 @@ async function addNewCareContext(req, res) {
     }
 
     console.log(body);
-    const abhaId = abhaAddress;
+    const abhaId = data.abhaAddress;
     try {
         const response = await axios.post(
             'https://dev.abdm.gov.in/hiecm/api/v3/link/carecontext',
