@@ -22,6 +22,7 @@ async function addNewCareContext(req, res) {
         }
       ]
     }
+    const abhaId = abhaAddress;
     try {
         const response = await axios.post(
             'https://dev.abdm.gov.in/hiecm/api/v3/link/carecontext',
@@ -29,7 +30,7 @@ async function addNewCareContext(req, res) {
             {
                 headers:{
                   ...config.gwApiConfig.headers,
-                  "X-LINK-TOKEN": config.tempDatabase[abhaAddress]
+                  "X-LINK-TOKEN": config.tempDatabase[abhaId]
                 }
             }
         );

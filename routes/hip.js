@@ -33,8 +33,8 @@ router.all('/*', async (req, res, next) => {
         //       break;
 
           case path === "/api/v3/hip/token/on-generate-token":
-                
-                config.tempDatabase[data.abhaAddress] = data.linkToken;
+                const abhaId = data.abhaAddress;
+                config.tempDatabase[abhaId] = data.linkToken;
                 res.status(200).send();
                 break;
 
