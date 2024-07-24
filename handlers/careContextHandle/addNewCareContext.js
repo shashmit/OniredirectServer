@@ -14,7 +14,7 @@ async function addNewCareContext(req, res) {
         patient: data.patient,
     }
 
-    console.log(req.body.patient);
+    console.log(body);
     const abhaId = data.abhaAddress;
     try {
         const response = await axios.post(
