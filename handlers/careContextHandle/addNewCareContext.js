@@ -22,20 +22,21 @@ async function addNewCareContext(req, res) {
         }
       ]
     }
+
+    console.log(body);
     const abhaId = abhaAddress;
     try {
         const response = await axios.post(
             'https://dev.abdm.gov.in/hiecm/api/v3/link/carecontext',
             body,
             {
-                ...config.gwApiConfig.headers,
-                headers:{
-                  "X-LINK-TOKEN": config.tempDatabase[abhaId]
-                }
+              headers: {
+                ...config.gwApiConfig,
+                "X-LINK-TOKEN": config.tempDatabase[abhaId]
+              }
             }
-        );
-
-        res.status(200).json(response.data);
+          );
+          res.status(200).json(response.data);
     } catch (error) {
         console.error('Error:', error.message);
         res.status(500).json({ status: "error", message: "Internal server error" });
