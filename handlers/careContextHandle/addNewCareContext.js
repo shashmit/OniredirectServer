@@ -14,7 +14,7 @@ async function addNewCareContext(req, res) {
         abhaAddress,
         patient: [
         {
-            referenceNumber,
+            referenceNumber: referenceNumber,
             display,
             careContexts,
             hiType,
