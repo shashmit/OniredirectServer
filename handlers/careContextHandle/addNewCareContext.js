@@ -15,10 +15,10 @@ async function addNewCareContext(req, res) {
         patient: [
         {
             referenceNumber: referenceNumber,
-            display,
-            careContexts,
-            hiType,
-            count
+            display: display,
+            careContexts: careContexts,
+            hiType: hiType,
+            count: count
         }
       ]
     }
