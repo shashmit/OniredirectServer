@@ -9,7 +9,10 @@ export default async function discoverController(query,headers) {
     if(!config.accessToken){
         await refreshAccessToken();
     }
-    const patientInfo = await discoverPatients(query);
+    const patientInfo = discoverPatients(query);
+
+    console.log(patientInfo);
+    
     const body = {
         transactionId: query.transactionId,
         patient: patientInfo.patient,
@@ -17,7 +20,9 @@ export default async function discoverController(query,headers) {
             requestId: headers["request-id"]
         }
     }
-    const response = await axios.post(
+    let response;
+    try{
+      response = await axios.post(
         "https://dev.abdm.gov.in/api/v3/hiecm/user-initiated-linking/patient/care-context/on-discover",
         body,
         {
@@ -28,7 +33,9 @@ export default async function discoverController(query,headers) {
           }
         }
       );
-
+    }catch(err){
+        console.log(err);
+    }
       // config.OTPDATABASE.push({patient: patientInfo.patient, transactionId: query.transactionId});
 
       config.OTPDATABASE.push({
