@@ -19,6 +19,7 @@ export default async function discoverController(query,headers) {
             requestId: headers["request-id"]
         }
     }
+    console.log(config.gwApiConfig.headers.Authorization);
     const response = await axios.post(
         "https://dev.abdm.gov.in/api/v3/hiecm/user-initiated-linking/patient/care-context/on-discover",
         body,
