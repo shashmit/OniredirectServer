@@ -33,7 +33,7 @@ async function generateToken(req, res) {
                 "REQUEST-ID": uuidv4(),
                 "TIMESTAMP": new Date().toISOString(),
                 "X-HIP-ID": "SBX_007421",
-                "X-CM-ID": sbx
+                "X-CM-ID": "sbx"
             }
           }
       );
