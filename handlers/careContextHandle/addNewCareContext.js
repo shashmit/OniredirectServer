@@ -13,9 +13,9 @@ async function addNewCareContext(req, res) {
         abhaAddress: data.abhaAddress,
         patient: data.patient,
     }
-
-    console.log(config.tempDatabase[abhaId]);
     const abhaId = data.abhaAddress;
+    console.log(config.tempDatabase[abhaId]);
+  
     try {
         const response = await axios.post(
             'https://dev.abdm.gov.in/hiecm/api/v3/link/carecontext',
