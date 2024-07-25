@@ -25,7 +25,7 @@ async function notifyUser(req, res) {
     };
 
     const response = await axios.post(
-      'https://dev.abdm.gov.in/gateway/v0.5/patients/sms/notify2',
+      'https://dev.abdm.gov.in/hiecm/api/v3/link/patient/links/sms/notify2',
       body,
       config.gwApiConfig // Assuming this is defined in your config file
     );
