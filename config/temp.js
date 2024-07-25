@@ -2,6 +2,8 @@ let accessToken = null;
 let gwApiConfig = null;
 let transactionId = null;
 const tempDatabase = {};
+
+
 const patients = [
   { 
     id: '91126110345082@sbx',
