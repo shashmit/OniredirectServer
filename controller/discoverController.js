@@ -11,15 +11,12 @@ export default async function discoverController(query,headers) {
     }
     const patientInfo = await discoverPatients(query);
     const body = {
-        // requestId: requestId,
-        // timestamp: timestamp,
         transactionId: query.transactionId,
         patient: patientInfo.patient,
         resp:{
             requestId: headers["request-id"]
         }
     }
-    console.log(config.gwApiConfig.headers.Authorization);
     const response = await axios.post(
         "https://dev.abdm.gov.in/api/v3/hiecm/user-initiated-linking/patient/care-context/on-discover",
         body,
