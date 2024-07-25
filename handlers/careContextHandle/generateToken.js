@@ -32,7 +32,7 @@ async function generateToken(req, res) {
                 Authorization: config.gwApiConfig.Authorization,
                 "REQUEST-ID": uuidv4(),
                 "TIMESTAMP": new Date().toISOString(),
-                "X-HIP-ID": SBX_007421,
+                "X-HIP-ID": "SBX_007421",
                 "X-CM-ID": sbx
             }
           }
