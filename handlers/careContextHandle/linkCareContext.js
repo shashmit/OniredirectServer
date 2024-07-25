@@ -3,7 +3,7 @@ import axios from 'axios';
 import config from '../../config/temp.js';
 import refreshAccessToken from '../../utils/refreshToken.js';
 
-async function addNewCareContext(req, res) {
+async function linkCareContext(req, res) {
     const data = req.body;
     if (!config.accessToken) {
         await refreshAccessToken();
@@ -15,14 +15,18 @@ async function addNewCareContext(req, res) {
     }
     const abhaId = data.abhaAddress;
     console.log(config.tempDatabase[abhaId]);
-  
+
     try {
         const response = await axios.post(
             'https://dev.abdm.gov.in/hiecm/api/v3/link/carecontext',
             body,
             {
               headers: {
-                ...config.gwApiConfig.headers,
+                "REQUEST-ID": uuidv4(),
+                "TIMESTAMP": new Date().toISOString(),
+                Authorization: config.gwApiConfig.Authorization,
+                "X-HIP-ID": "SBX_007421",
+                "X-CM-ID": "sbx",
                 "X-LINK-TOKEN": config.tempDatabase[abhaId]
               }
             }
@@ -34,4 +38,4 @@ async function addNewCareContext(req, res) {
     }
 }
 
-export default addNewCareContext;
+export default linkCareContext;
