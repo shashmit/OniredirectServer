@@ -6,7 +6,7 @@ import generateToken  from '../handlers/careContextHandle/generateToken.js';
 import addNewCareContext from '../handlers/careContextHandle/addNewCareContext.js';
 
 // router.post("/addCareContext", addCareContext);
-// router.post("/notify", notifyUser);
+router.post("/notify", notifyUser);
 
 //v3
 router.post('/generate/token', generateToken);
