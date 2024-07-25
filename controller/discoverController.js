@@ -13,8 +13,8 @@ export default async function discoverController(query,headers) {
     const requestId = uuidv4();
     const timestamp = new Date().toISOString();
     const body = {
-        requestId: requestId,
-        timestamp: timestamp,
+        // requestId: requestId,
+        // timestamp: timestamp,
         transactionId: query.transactionId,
         patient: patientInfo.patient,
         resp:{
@@ -22,7 +22,7 @@ export default async function discoverController(query,headers) {
         }
     }
     const response = await axios.post(
-        "https://dev.abdm.gov.in/gateway/v0.5/care-contexts/on-discover",
+        "https://dev.abdm.gov.in/api/v3/hiecm/user-initiated-linking/patient/care-context/on-discover",
         body,
         config.gwApiConfig
       );
