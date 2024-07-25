@@ -10,8 +10,6 @@ export default async function discoverController(query,headers) {
         await refreshAccessToken();
     }
     const patientInfo = await discoverPatients(query);
-    const requestId = uuidv4();
-    const timestamp = new Date().toISOString();
     const body = {
         // requestId: requestId,
         // timestamp: timestamp,
@@ -24,7 +22,13 @@ export default async function discoverController(query,headers) {
     const response = await axios.post(
         "https://dev.abdm.gov.in/api/v3/hiecm/user-initiated-linking/patient/care-context/on-discover",
         body,
-        config.gwApiConfig
+        {
+          headers: {
+            Authorization: `${config.gwApiConfig.headers.Authorization}`,
+            "TIMESTAMP": new Date().toISOString(),
+            "X-HIU-ID": "SBX_007421",
+          }
+        }
       );
 
       // config.OTPDATABASE.push({patient: patientInfo.patient, transactionId: query.transactionId});
@@ -35,6 +39,7 @@ export default async function discoverController(query,headers) {
         otp: null,
         linkReNumber: null,
       });
+      console.log("discover",JSON.stringify(config.OTPDATABASE));
     
       return {
         status: response.status,

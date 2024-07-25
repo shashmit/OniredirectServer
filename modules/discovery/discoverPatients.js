@@ -128,11 +128,11 @@ const patients = [
     yearOfBirth: 2003,
     careContexts: [
       {
-        referenceNumber: "visit-12345678-1234-1234-1234-123456789012",
+        referenceNumber: "visit-1234678-1234-1234-1234-123456789012",
         display: "Consultation on 14th July"
       },
       {
-        referenceNumber: "visit-87654321-4321-4321-4321-210987654321",
+        referenceNumber: "visit-8765431-4321-4321-4321-210987654321",
         display: "Follow-up on 28th July"
       }
     ]
