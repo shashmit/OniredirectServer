@@ -34,11 +34,6 @@ export default async function discoverController(query,headers) {
           }
         }
       );
-    }catch(err){
-        console.log(err);
-    }
-      // config.OTPDATABASE.push({patient: patientInfo.patient, transactionId: query.transactionId});
-
       config.OTPDATABASE.push({
         patient: patientInfo.patient,
         transactionId: query.transactionId,
@@ -46,6 +41,9 @@ export default async function discoverController(query,headers) {
         linkReNumber: null,
       });
       console.log("discover",JSON.stringify(config.OTPDATABASE));
-    
-    return response.data;
+      return response.data;
+    }catch(err){
+        console.log(err);
+    }
+      // config.OTPDATABASE.push({patient: patientInfo.patient, transactionId: query.transactionId});
 }
