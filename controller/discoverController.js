@@ -15,10 +15,8 @@ export default async function discoverController(query,headers) {
     
     const body = {
         transactionId: query.transactionId,
-        patient: {
-          patientInfo.patient,
-        }
-        resp:{
+        patient: patientInfo.match,
+        response:{
             requestId: headers["request-id"]
         }
     }

@@ -217,11 +217,13 @@ function generatePUID() {
 
 function formatResponse(matchedPatient, matchedBy) {
   return {
-    patient: {
+    match: {
+      patient: {
       referenceNumber: generatePUID(), //Generate a unique 7digit PUID for each patient and use it as the reference number
       display: matchedPatient.name,
       careContexts: matchedPatient.careContexts,
-      matchedBy: matchedBy
-    }
+    },
+    matchedBy: matchedBy
+  }
   };
 }
