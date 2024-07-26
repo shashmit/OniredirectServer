@@ -15,7 +15,9 @@ export default async function discoverController(query,headers) {
     
     const body = {
         transactionId: query.transactionId,
-        patient: patientInfo.patient,
+        patient: {
+          patientInfo.patient,
+        }
         resp:{
             requestId: headers["request-id"]
         }
@@ -27,9 +29,10 @@ export default async function discoverController(query,headers) {
         body,
         {
           headers: {
-            Authorization: `${config.gwApiConfig.headers.Authorization}`,
+            Authorization: config.gwApiConfig.Authorization,
+            "REQUEST-ID": uuidv4(),
             "TIMESTAMP": new Date().toISOString(),
-            "X-HIU-ID": "SBX_007421",
+            "X-CM-ID": "sbx",
           }
         }
       );
