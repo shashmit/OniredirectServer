@@ -47,9 +47,5 @@ export default async function discoverController(query,headers) {
       });
       console.log("discover",JSON.stringify(config.OTPDATABASE));
     
-      return {
-        status: response.status,
-        statusText: response.statusText,
-        data: response.config.data,
-      };
+    return response.data;
 }
